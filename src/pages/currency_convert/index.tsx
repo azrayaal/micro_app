@@ -1,6 +1,17 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
+interface Rates {
+  [key: string]: number;
+}
+
 export default function CurrencyConverter() {
+  const [amount, setAmount] = useState<number>();
+  const [fromCurrency, setFromCurrency] = useState("IDR");
+  const [toCurrency, setTocurrency] = useState("USD");
+  const [exchangeRates, setExchangeRates] = useState<Rates>({});
+  const [convertedAmount, setConvertedAmount] = useState<number | null>(null);
+
   return (
     <>
       <Link to="/">
@@ -16,7 +27,7 @@ export default function CurrencyConverter() {
             <div className="grid grid-cols-1">
               <div className="bg-gray-200  p-6 rounded-md shadow-md">
                 <form action="">
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="Amount">
                       <label htmlFor="amount" className="mr-2">
                         Amount:
@@ -30,7 +41,7 @@ export default function CurrencyConverter() {
                       />
                     </div>
                     <div className="From Currency">
-                      <label htmlFor="currencyFrom" className="ml-4 mr-2">
+                      <label htmlFor="currencyFrom" className="md:ml-4 mr-2">
                         From Currency:
                       </label>
                       <select
@@ -42,7 +53,7 @@ export default function CurrencyConverter() {
                       </select>
                     </div>
                     <div className="To Currency">
-                      <label htmlFor="currencyTo" className="ml-4 mr-2">
+                      <label htmlFor="currencyTo" className="md:ml-4 mr-2">
                         To Currency:
                       </label>
                       <select
@@ -55,7 +66,7 @@ export default function CurrencyConverter() {
                     </div>
                   </div>
                 </form>
-                <div className="result">
+                <div className="result py-3">
                   <p>usd idr= </p>
                 </div>
               </div>
