@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import dataHero from "./component_ml/hero-meta-final";
 
 interface Hero {
   id: string;
@@ -21,7 +20,7 @@ export default function MobileLegend() {
     await axios
       .get(`https://api.dazelpro.com/mobile-legends/hero?heroName=${setSearch}`)
       .then((response) => {
-        // console.log("data search", response.data.hero);
+        console.log("data search", response.data.hero);
         setSearchInfo(response);
       })
       .catch((error) => {
@@ -51,9 +50,11 @@ export default function MobileLegend() {
 
   return (
     <>
-      <h2 className="text-xl font-bold mb-2">MOBILE LEGEND</h2>
+      <h2 className="text-3xl font-bold mb-2 text-center py-5 my-5">
+        MOBILE LEGEND
+      </h2>
 
-      <div className="mb-3 xl:w-1/3 w-80 justify-center">
+      <div className="mb-3 xl:w-1/3 w-80 mx-auto">
         <label className="relative block">
           <form onSubmit={handleSearch}>
             <input
