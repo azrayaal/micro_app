@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 interface Hero {
   id: string;
@@ -50,10 +51,10 @@ export default function MobileLegend() {
 
   return (
     <>
-      <h2 className="text-3xl font-bold mb-2 text-center py-5 my-5">
-        MOBILE LEGEND
-      </h2>
-
+      <Link to="/">
+        <p className="text-4xl font-bold mb-2 ml-5 pl-5 py-2 my-5">◀</p>
+      </Link>
+      <p className="text-3xl font-bold mb-2 text-center pb-5 ">MOBILE LEGEND</p>
       <div className="mb-3 xl:w-1/3 w-80 mx-auto">
         <label className="relative block">
           <form onSubmit={handleSearch}>
@@ -68,7 +69,6 @@ export default function MobileLegend() {
           </form>
         </label>
       </div>
-
       <div className="flex justify-center">
         <main className="list-film py-3">
           <div className="container-fluid">
