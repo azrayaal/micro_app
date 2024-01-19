@@ -94,6 +94,12 @@ export default function CountDuration() {
                     )}
                     <p>{isValid ? duration : "Invalid"}</p>
                   </div>
+                  <button
+                    onClick={handleRefresh}
+                    className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
+                  >
+                    Refresh
+                  </button>
                 </div>
               </div>
             </div>
