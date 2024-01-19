@@ -18,6 +18,20 @@ export default function Home() {
                   </h2>
                 </div>
               </Link>
+              <Link to="/currencyconvert">
+                <div className="bg-white p-6 rounded-md shadow-md">
+                  <h2 className="text-xl font-bold mb-2 text-center">
+                    CURRENCY CONVERT
+                  </h2>
+                </div>
+              </Link>
+              <Link to="/salarycalculating">
+                <div className="bg-white p-6 rounded-md shadow-md">
+                  <h2 className="text-xl font-bold mb-2 text-center">
+                    SALARY CALCULATING
+                  </h2>
+                </div>
+              </Link>
               <Link to="/tictactoe">
                 <div className="bg-gray-200 p-6 rounded-md shadow-md">
                   <h2 className="text-xl font-bold mb-2 text-center">
@@ -32,24 +46,10 @@ export default function Home() {
                   </h2>
                 </div>
               </Link>
-              <Link to="/currencyconvert">
-                <div className="bg-white p-6 rounded-md shadow-md">
-                  <h2 className="text-xl font-bold mb-2 text-center">
-                    CURRENCY CONVERT
-                  </h2>
-                </div>
-              </Link>
               <Link to="/matchingcard">
                 <div className="bg-gray-200 p-6 rounded-md shadow-md">
                   <h2 className="text-xl font-bold mb-2 text-center">
                     MATCHING CARD
-                  </h2>
-                </div>
-              </Link>
-              <Link to="/salarycalculating">
-                <div className="bg-gray-200 p-6 rounded-md shadow-md">
-                  <h2 className="text-xl font-bold mb-2 text-center">
-                    SALARY CALCULATING
                   </h2>
                 </div>
               </Link>
