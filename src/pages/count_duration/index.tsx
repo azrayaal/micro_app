@@ -1,6 +1,49 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function CountDuration() {
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [duration, setDuration] = useState<string>("");
+  const [isValid, setIsValid] = useState<boolean>(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (isValid && startDate && endDate) {
+        const timeDifference = endDate.getTime() - Date.now();
+        const seconds = Math.floor(timeDifference / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+
+        const durationString = `${days}d ${hours % 24}h ${minutes % 60}m ${
+          seconds % 60
+        }s`;
+        setDuration(durationString);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [startDate, endDate, isValid]);
+
+  const handleStartDateChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const newStartDate = new Date(event.target.value);
+    setStartDate(newStartDate);
+    setIsValid(true);
+  };
+
+  const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newEndDate = new Date(event.target.value);
+    if (startDate && newEndDate < startDate) {
+      setIsValid(false);
+    } else {
+      setEndDate(newEndDate);
+      setIsValid(true);
+    }
+  };
+
   const handleRefresh = () => {
     window.location.reload();
   };
@@ -17,45 +60,40 @@ export default function CountDuration() {
         <div className="flex justify-center">
           <div className="py-5 my5">
             <div className="grid grid-cols-1">
-              <div className="bg-gray-200  p-6 rounded-md shadow-md">
-                <form action="">
-                  {/* <form action="" onSubmit={countSalary}> */}
-                  <div className="grid grid-cols-1 md:grid-cols-1 md:gap-2 gap-4">
-                    <label htmlFor="gajiPokok" className="mr-2">
-                      Enter the Target Date and Time:
-                    </label>
-                    <div className="GAJI_POKOK">
+              <div className="grid grid-cols-1">
+                <div className="bg-gray-200 p-6 rounded-md shadow-md">
+                  <div className="py-3">
+                    <label>
+                      Start Date:
                       <input
-                        type="date"
-                        id="gajiPokok"
-                        name="gajiPokok"
-                        // value={gajiPokok}
-                        // onChange={handleGajiPokok}
-                        className="border p-2 rounded-md"
-                        placeholder="Enter amount"
+                        className="ml-3"
+                        type="datetime-local"
+                        onChange={handleStartDateChange}
                       />
-                    </div>
-                    <div className="BUTTONS ">
-                      <button
-                        type="submit"
-                        className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mr-3"
-                      >
-                        Count
-                      </button>
-                      <button
-                        onClick={handleRefresh}
-                        className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600 ml-3"
-                      >
-                        Refresh
-                      </button>
-                    </div>
+                    </label>
                   </div>
-                </form>
-                <div className="result py-3">
-                  <p className="text-center md:text-left font-bold py-2">
-                    Countdown:{" "}
-                  </p>
-                  {/* <p>Gaji Kotor: Rp. {gajiPokok}</p> */}
+                  <div className="py-3">
+                    <label>
+                      End Date:
+                      <input
+                        className="ml-4"
+                        type="datetime-local"
+                        onChange={handleEndDateChange}
+                      />
+                    </label>
+                  </div>
+                  <div className="result py-3">
+                    <p className="text-center md:text-left font-bold py-2">
+                      Countdown:{" "}
+                    </p>
+                    {!isValid && (
+                      <div style={{ color: "red" }}>
+                        Ooops kita gabisa balik ke masa lalu, coba pilih masa
+                        depan
+                      </div>
+                    )}
+                    <p>{isValid ? duration : "Invalid"}</p>
+                  </div>
                 </div>
               </div>
             </div>
