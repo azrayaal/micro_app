@@ -32,17 +32,17 @@ export default function Home() {
                   </h2>
                 </div>
               </Link>
+              <Link to="/countduration">
+                <div className="bg-white p-6 rounded-md shadow-md">
+                  <h2 className="text-xl font-bold mb-2 text-center">
+                    COUNT DURATION
+                  </h2>
+                </div>
+              </Link>
               <Link to="/tictactoe">
                 <div className="bg-gray-200 p-6 rounded-md shadow-md">
                   <h2 className="text-xl font-bold mb-2 text-center">
                     TIC TAC TOE
-                  </h2>
-                </div>
-              </Link>
-              <Link to="/countduration">
-                <div className="bg-gray-200 p-6 rounded-md shadow-md">
-                  <h2 className="text-xl font-bold mb-2 text-center">
-                    COUNT DURATION
                   </h2>
                 </div>
               </Link>
