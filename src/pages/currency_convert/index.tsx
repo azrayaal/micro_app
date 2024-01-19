@@ -8,7 +8,6 @@ interface Rates {
 
 export default function CurrencyConverter() {
   const [amount, setAmount] = useState<number>();
-  //   const [amount, setAmount] = useState("");
   const [fromCurrency, setFromCurrency] = useState("IDR");
   const [toCurrency, setTocurrency] = useState("USD");
   const [exchangeRates, setExchangeRates] = useState<Rates>({});
