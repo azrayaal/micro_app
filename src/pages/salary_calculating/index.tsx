@@ -1,10 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function SalaryCalculating() {
-  const [gajiPokok, setGajiPokok] = useState();
-  const [tunjangan, setTunjangan] = useState();
-  const [kewajibanPokok, setKewajibanPokok] = useState();
+  const [gajiPokok, setGajiPokok] = useState<number>();
+  const [tunjangan, setTunjangan] = useState<number>();
+  const [kewajibanPokok, setKewajibanPokok] = useState<number>();
+  const [totalSalary, setTotalSalary] = useState<number>();
+
+  const countSalary = (e: any) => {
+    e.preventDefault();
+    if (gajiPokok && tunjangan) {
+      let totalPokok = gajiPokok + tunjangan;
+      setTotalSalary(totalPokok);
+      console.log("total", totalPokok);
+      if (kewajibanPokok) setTotalSalary((totalPokok -= kewajibanPokok));
+    }
+  };
+
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+  const handleGajiPokok = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    const numericValue = parseFloat(inputValue);
+
+    if (!isNaN(numericValue)) {
+      setGajiPokok(numericValue);
+    }
+  };
+  const handleTunjangan = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    const numericValue = parseFloat(inputValue);
+
+    if (!isNaN(numericValue)) {
+      setTunjangan(numericValue);
+    }
+  };
+  const handleKewajiban = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    const numericValue = parseFloat(inputValue);
+
+    if (!isNaN(numericValue)) {
+      setKewajibanPokok(numericValue);
+    }
+  };
+
+  useEffect(() => {
+    const mockEvent = { preventDefault: () => {} };
+    countSalary(mockEvent);
+  }, []);
 
   return (
     <>
@@ -20,8 +64,7 @@ export default function SalaryCalculating() {
           <div className="py-5 my5">
             <div className="grid grid-cols-1">
               <div className="bg-gray-200  p-6 rounded-md shadow-md">
-                {/* <form action="" onSubmit={currencyConvert}> */}
-                <form action="">
+                <form action="" onSubmit={countSalary}>
                   <div className="grid grid-cols-1 md:grid-cols-1 md:gap-2 gap-4">
                     <div className="GAJI_POKOK">
                       <label htmlFor="gajiPokok" className="mr-2">
@@ -32,7 +75,7 @@ export default function SalaryCalculating() {
                         id="gajiPokok"
                         name="gajiPokok"
                         value={gajiPokok}
-                        // onChange={handleAmountChange}
+                        onChange={handleGajiPokok}
                         className="border p-2 rounded-md"
                         placeholder="Enter amount"
                       />
@@ -46,7 +89,7 @@ export default function SalaryCalculating() {
                         id="tunjangan"
                         name="tunjangan"
                         value={tunjangan}
-                        // onChange={handleAmountChange}
+                        onChange={handleTunjangan}
                         className="border p-2 rounded-md"
                         placeholder="Enter amount"
                       />
@@ -60,7 +103,7 @@ export default function SalaryCalculating() {
                         id="kewajibanPokok"
                         name="kewajibanPokok"
                         value={kewajibanPokok}
-                        // onChange={handleAmountChange}
+                        onChange={handleKewajiban}
                         className="border p-2 rounded-md"
                         placeholder="Enter amount"
                       />
@@ -72,27 +115,23 @@ export default function SalaryCalculating() {
                       >
                         Hitung Gaji
                       </button>
-                      {/* <button
+                      <button
                         onClick={handleRefresh}
                         className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600 ml-3"
                       >
                         Refresh
-                      </button> */}
+                      </button>
                     </div>
                   </div>
                 </form>
-                {/* <div className="result py-3">
+                <div className="result py-3">
                   <p className="text-center md:text-left font-bold py-2">
                     Results:{" "}
                   </p>
-                  <p>
-                    {amount} {fromCurrency}
-                  </p>
-                  <p> = </p>
-                  <p>
-                    {convertedAmount} {toCurrency}
-                  </p>
-                </div> */}
+                  <p>Gaji Kotor: Rp. {gajiPokok}</p>
+                  <p>Gaji Pokok: Rp. {tunjangan}</p>
+                  <p>Gaji Bersih: Rp. {totalSalary}</p>
+                </div>
               </div>
             </div>
           </div>
