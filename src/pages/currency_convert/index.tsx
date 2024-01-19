@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface Rates {
@@ -7,10 +8,44 @@ interface Rates {
 
 export default function CurrencyConverter() {
   const [amount, setAmount] = useState<number>();
+  //   const [amount, setAmount] = useState("");
   const [fromCurrency, setFromCurrency] = useState("IDR");
   const [toCurrency, setTocurrency] = useState("USD");
   const [exchangeRates, setExchangeRates] = useState<Rates>({});
-  const [convertedAmount, setConvertedAmount] = useState<number | null>(null);
+  const [convertedAmount, setConvertedAmount] = useState<number | null>(0);
+
+  const currencyConvert = async (e: any) => {
+    e.preventDefault();
+    const apiKey = "API_KEY";
+    console.log("amount", amount);
+    await axios
+      .get(`https://open.er-api.com/v6/latest/${fromCurrency}?apikey=${apiKey}`)
+      .then((response) => {
+        console.log("data search", response.data);
+        setExchangeRates(response.data.rates);
+        if (amount !== undefined && amount !== 0 && exchangeRates[toCurrency]) {
+          const conversion = amount * exchangeRates[toCurrency];
+          setConvertedAmount(conversion);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    const numericValue = parseFloat(inputValue);
+
+    if (!isNaN(numericValue)) {
+      setAmount(numericValue);
+    }
+  };
+
+  useEffect(() => {
+    const mockEvent = { preventDefault: () => {} };
+    currencyConvert(mockEvent);
+  }, []);
 
   return (
     <>
@@ -26,8 +61,8 @@ export default function CurrencyConverter() {
           <div className="py-5 my5">
             <div className="grid grid-cols-1">
               <div className="bg-gray-200  p-6 rounded-md shadow-md">
-                <form action="">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <form action="" onSubmit={currencyConvert}>
+                  <div className="grid grid-cols-1 md:grid-cols-4 md:gap-2 gap-4">
                     <div className="Amount">
                       <label htmlFor="amount" className="mr-2">
                         Amount:
@@ -36,6 +71,8 @@ export default function CurrencyConverter() {
                         type="number"
                         id="amount"
                         name="amount"
+                        value={amount}
+                        onChange={handleAmountChange}
                         className="border p-2 rounded-md"
                         placeholder="Enter amount"
                       />
@@ -48,8 +85,14 @@ export default function CurrencyConverter() {
                         id="currencyFrom"
                         name="currencyFrom"
                         className="border p-2 rounded-md"
+                        value={fromCurrency}
+                        onChange={(e) => setFromCurrency(e.target.value)}
                       >
-                        {/* Add currency options here */}
+                        {Object.keys(exchangeRates).map((currency) => (
+                          <option key={currency} value={currency}>
+                            {currency}
+                          </option>
+                        ))}
                       </select>
                     </div>
                     <div className="To Currency">
@@ -60,14 +103,35 @@ export default function CurrencyConverter() {
                         id="currencyTo"
                         name="currencyTo"
                         className="border p-2 rounded-md"
+                        value={toCurrency}
+                        onChange={(e) => setTocurrency(e.target.value)}
                       >
-                        {/* Add currency options here */}
+                        {Object.keys(exchangeRates).map((currency) => (
+                          <option value={currency} key={currency}>
+                            {currency}
+                          </option>
+                        ))}
                       </select>
                     </div>
+                    <button
+                      type="submit"
+                      className="bg-blue-500 text-white p-2 ml-4 rounded-md hover:bg-blue-600"
+                    >
+                      Convert
+                    </button>
                   </div>
                 </form>
                 <div className="result py-3">
-                  <p>usd idr= </p>
+                  <p className="text-center md:text-left font-bold py-2">
+                    Results:{" "}
+                  </p>
+                  <p>
+                    {amount} {fromCurrency}
+                  </p>
+                  <p> = </p>
+                  <p>
+                    {convertedAmount} {toCurrency}
+                  </p>
                 </div>
               </div>
             </div>
