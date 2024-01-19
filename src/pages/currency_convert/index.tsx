@@ -32,6 +32,10 @@ export default function CurrencyConverter() {
       });
   };
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
     const numericValue = parseFloat(inputValue);
@@ -112,12 +116,20 @@ export default function CurrencyConverter() {
                         ))}
                       </select>
                     </div>
-                    <button
-                      type="submit"
-                      className="bg-blue-500 text-white p-2 ml-4 rounded-md hover:bg-blue-600"
-                    >
-                      Convert
-                    </button>
+                    <div className="BUTTONS justify-center items-center flex">
+                      <button
+                        type="submit"
+                        className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mr-3"
+                      >
+                        Convert
+                      </button>
+                      <button
+                        onClick={handleRefresh}
+                        className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600 ml-3"
+                      >
+                        Refresh
+                      </button>
+                    </div>
                   </div>
                 </form>
                 <div className="result py-3">
