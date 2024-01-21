@@ -6,6 +6,34 @@ export default function TicTacToe() {
   const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
 
+  function calculateWinner(squares: any) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (
+        squares[a] &&
+        squares[a] === squares[b] &&
+        squares[a] === squares[c]
+      ) {
+        return squares[a];
+      }
+    }
+    return null;
+  }
+
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   const onHandleClick = (i: any) => {
     if (squares[i]) {
       return;
@@ -19,16 +47,34 @@ export default function TicTacToe() {
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
   };
+
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner) {
+    status = "Winner " + `"${winner}"`;
+  } else {
+    status = "Next Player: " + (xIsNext ? "X" : "O");
+  }
   return (
     <>
-      <Link to="/">
-        <p className="text-4xl font-bold mb-2 ml-5 pl-5 py-2 my-5">◀</p>
-      </Link>
+      <div>
+        <Link to="/">
+          <p className="text-4xl font-bold mb-2 ml-5 pl-5 py-2 my-5">◀</p>
+        </Link>
+      </div>
       <h2 className="text-3xl font-bold mb-2 text-center pb-5">TIC TAC TOE</h2>
-
+      <div className="flex justify-center items-center">
+        <button
+          onClick={handleRefresh}
+          className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
+        >
+          Refresh
+        </button>
+      </div>
       <main>
         <div className="flex justify-center">
           <div className="py-5 my5">
+            <div className="status">{status}</div>
             <div className="grid grid-cols-1 gap-2">
               <div className="grid grid-cols-3 gap-2">
                 <Square
