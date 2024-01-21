@@ -1,6 +1,21 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function WordScramb() {
+  const [result, setResult] = useState("");
+  const [answer, setAnswer] = useState("");
+
+  const scrambleWord = `Burick`;
+
+  const checkAnswer = (e: any) => {
+    e.preventDefault();
+    if (answer == "Rubick" || answer == "rubick") {
+      setResult("You're correct!!");
+    } else {
+      setResult("Try Again!");
+    }
+  };
+
   return (
     <>
       <>
@@ -16,41 +31,37 @@ export default function WordScramb() {
             <div className="py-5 my5">
               <div className="grid grid-cols-1">
                 <div className="bg-gray-200  p-6 rounded-md shadow-md">
-                  {/* <form action="" onSubmit={countSalary}> */}
-                  <form action="">
+                  <form action="" onSubmit={checkAnswer}>
                     <div className="grid grid-cols-1 md:grid-cols-1 md:gap-2 gap-4">
                       <div className="GAJI_POKOK">
                         <label htmlFor="gajiPokok" className="mr-2">
-                          Gaji Pokok:
+                          Guess the word:
                         </label>
-                        <input
-                          type="number"
-                          id="gajiPokok"
-                          name="gajiPokok"
-                          //   value={gajiPokok}
-                          //   onChange={handleGajiPokok}
-                          className="border p-2 rounded-md"
-                          placeholder="Enter amount"
-                        />
+                        <p className="font-medium text-xl">{scrambleWord}</p>
                       </div>
+                      <input
+                        type="text"
+                        id=""
+                        name=""
+                        value={answer}
+                        onChange={(e) => setAnswer(e.target.value)}
+                        className="border p-2 rounded-md"
+                        placeholder="Guess the word"
+                      />
 
-                      <div className="BUTTONS justify-center items-center flex">
-                        <button
-                          type="submit"
-                          className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mr-3"
-                        >
-                          Hitung Gaji
-                        </button>
-                        <button className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600 ml-3">
-                          Refresh
-                        </button>
-                      </div>
+                      <button
+                        type="submit"
+                        className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mr-3"
+                      >
+                        Check Answer
+                      </button>
                     </div>
                   </form>
                   <div className="result py-3">
                     <p className="text-center md:text-left font-bold py-2">
                       Results:{" "}
                     </p>
+                    <p>{result}</p>
                   </div>
                 </div>
               </div>
