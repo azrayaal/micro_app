@@ -6,6 +6,7 @@ import CurrencyConverter from "./pages/currency_convert";
 import SalaryCalculating from "./pages/salary_calculating";
 import CountDuration from "./pages/count_duration";
 import TicTacToe from "./pages/tic_tac_toe";
+import WordScramb from "./pages/word_scramb";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/salarycalculating" element={<SalaryCalculating />} />
         <Route path="/countduration" element={<CountDuration />} />
         <Route path="/tictactoe" element={<TicTacToe />} />
+        <Route path="/wordscramb" element={<WordScramb />} />
       </Routes>
     </Router>
   );

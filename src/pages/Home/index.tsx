@@ -46,17 +46,17 @@ export default function Home() {
                   </h2>
                 </div>
               </Link>
+              <Link to="/wordscramb">
+                <div className="bg-white p-6 rounded-md shadow-md">
+                  <h2 className="text-xl font-bold mb-2 text-center">
+                    WORD SCRAMB
+                  </h2>
+                </div>
+              </Link>
               <Link to="/matchingcard">
                 <div className="bg-gray-200 p-6 rounded-md shadow-md">
                   <h2 className="text-xl font-bold mb-2 text-center">
                     MATCHING CARD
-                  </h2>
-                </div>
-              </Link>
-              <Link to="/wordscramb">
-                <div className="bg-gray-200 p-6 rounded-md shadow-md">
-                  <h2 className="text-xl font-bold mb-2 text-center">
-                    WORD SCRAMB
                   </h2>
                 </div>
               </Link>
