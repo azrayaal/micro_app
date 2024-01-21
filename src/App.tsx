@@ -5,6 +5,7 @@ import MobileLegend from "./pages/mobile_legend";
 import CurrencyConverter from "./pages/currency_convert";
 import SalaryCalculating from "./pages/salary_calculating";
 import CountDuration from "./pages/count_duration";
+import TicTacToe from "./pages/tic_tac_toe";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/currencyconvert" element={<CurrencyConverter />} />
         <Route path="/salarycalculating" element={<SalaryCalculating />} />
         <Route path="/countduration" element={<CountDuration />} />
+        <Route path="/tictactoe" element={<TicTacToe />} />
       </Routes>
     </Router>
   );

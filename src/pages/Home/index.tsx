@@ -40,7 +40,7 @@ export default function Home() {
                 </div>
               </Link>
               <Link to="/tictactoe">
-                <div className="bg-gray-200 p-6 rounded-md shadow-md">
+                <div className="bg-white p-6 rounded-md shadow-md">
                   <h2 className="text-xl font-bold mb-2 text-center">
                     TIC TAC TOE
                   </h2>
