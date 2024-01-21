@@ -1,23 +1,15 @@
-import { useState } from "react";
-
 export interface SquareProps {
   value: number;
+  onSquareClick: () => void;
 }
 
-// export default function Square(props: SquareProps) {
-export default function Square() {
-  //   const { value } = props;
-  const [value, setValue] = useState<string | null>(null);
-
-  const handleClick = () => {
-    // console.log("clicked!");
-    setValue("X");
-  };
+export default function Square(props: SquareProps) {
+  const { value, onSquareClick } = props;
 
   return (
     <button
-      className="bg-white p-6 rounded shadow-md square font-bold"
-      onClick={handleClick}
+      className="bg-white p-6 rounded shadow-md square font-bold button"
+      onClick={onSquareClick}
     >
       {value}
     </button>
