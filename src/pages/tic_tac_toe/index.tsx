@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import Square from "./components/square";
+import { useEffect } from "react";
 
 export default function TicTacToe() {
   return (
@@ -13,37 +15,19 @@ export default function TicTacToe() {
           <div className="py-5 my5">
             <div className="grid grid-cols-1 gap-2">
               <div className="grid grid-cols-3 gap-2">
-                <div className="bg-white p-4 rounded shadow-md">
-                  <div className="square">1</div>
-                </div>
-                <div className="bg-white p-4 rounded shadow-md">
-                  <div className="square">1</div>
-                </div>
-                <div className="bg-white p-4 rounded shadow-md">
-                  <div className="square">1</div>
-                </div>
+                <Square />
+                <Square />
+                <Square />
               </div>
               <div className="grid grid-cols-3 gap-2">
-                <div className="bg-white p-4 rounded shadow-md">
-                  <div className="square">2</div>
-                </div>
-                <div className="bg-white p-4 rounded shadow-md">
-                  <div className="square">2</div>
-                </div>
-                <div className="bg-white p-4 rounded shadow-md">
-                  <div className="square">2</div>
-                </div>
+                <Square />
+                <Square />
+                <Square />
               </div>
               <div className="grid grid-cols-3 gap-2">
-                <div className="bg-white p-4 rounded shadow-md">
-                  <div className="square">3</div>
-                </div>
-                <div className="bg-white p-4 rounded shadow-md">
-                  <div className="square">3</div>
-                </div>
-                <div className="bg-white p-4 rounded shadow-md">
-                  <div className="square">3</div>
-                </div>
+                <Square />
+                <Square />
+                <Square />
               </div>
             </div>
           </div>
