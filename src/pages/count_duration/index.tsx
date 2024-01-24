@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import BackButton from "../../components/backButton";
 
 export default function CountDuration() {
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -49,9 +50,7 @@ export default function CountDuration() {
   };
   return (
     <>
-      <Link to="/">
-        <p className="text-4xl font-bold mb-2 ml-5 pl-5 py-2 my-5">◀</p>
-      </Link>
+      <BackButton />
       <h2 className="text-3xl font-bold mb-2 text-center pb-5">
         COUNT DURATION
       </h2>

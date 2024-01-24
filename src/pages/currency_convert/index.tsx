@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import BackButton from "../../components/backButton";
 
 interface Rates {
   [key: string]: number;
@@ -52,9 +53,7 @@ export default function CurrencyConverter() {
 
   return (
     <>
-      <Link to="/">
-        <p className="text-4xl font-bold mb-2 ml-5 pl-5 py-2 my-5">◀</p>
-      </Link>
+      <BackButton />
       <h2 className="text-3xl font-bold mb-2 text-center pb-5">
         CURENCY CONVERTER
       </h2>

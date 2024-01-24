@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import HeroCard from "./components/HeroCard";
+import BackButton from "../../components/backButton";
 
 interface Hero {
   id: string;
@@ -51,9 +53,7 @@ export default function MobileLegend() {
 
   return (
     <>
-      <Link to="/">
-        <p className="text-4xl font-bold mb-2 ml-5 pl-5 py-2 my-5">◀</p>
-      </Link>
+      <BackButton />
       <p className="text-3xl font-bold mb-2 text-center pb-5 ">MOBILE LEGEND</p>
       <div className="mb-3 xl:w-1/3 w-80 mx-auto">
         <label className="relative block">
@@ -78,18 +78,12 @@ export default function MobileLegend() {
                   hero.hero_name.toLowerCase().includes(search.toLowerCase())
                 )
                 .map((hero) => (
-                  <div
-                    className="bg-white p-6 rounded-md shadow-md"
-                    key={hero.id}
-                  >
-                    <h2 className="text-xl font-bold mb-2">
-                      Name: {hero.hero_name}
-                    </h2>
-                    <p className="text-gray-600">Role: {hero.hero_role}</p>
-                    <p className="text-gray-600">
-                      Speciality: {hero.hero_specially}
-                    </p>
-                  </div>
+                  <HeroCard
+                    hero_name={hero.hero_name}
+                    hero_role={hero.hero_role}
+                    hero_specially={hero.hero_specially}
+                    id={hero.id}
+                  />
                 ))}
             </div>
           </div>

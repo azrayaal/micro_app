@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SquareMatchingCard from "./components/square";
+import BackButton from "../../components/backButton";
 
 export default function MatchingCard() {
   const [win, setWin] = useState<string>("");
@@ -8,9 +9,7 @@ export default function MatchingCard() {
   return (
     <>
       <div>
-        <Link to="/">
-          <p className="text-4xl font-bold mb-2 ml-5 pl-5 py-2 my-5">◀</p>
-        </Link>
+        <BackButton />
       </div>
       <h2 className="text-3xl font-bold mb-2 text-center pb-5">
         MATCHING CARD
